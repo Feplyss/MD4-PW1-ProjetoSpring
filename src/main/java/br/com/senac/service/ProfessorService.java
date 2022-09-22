@@ -28,9 +28,9 @@ public class ProfessorService {
 		repo.deleteById(id);
 	 }
 	 
-	public void update(Professor professorAlterado) {
+	public Professor update(Professor professorAlterado) {
 		Professor professor = select(professorAlterado.getId());
 		professor.setNome(professorAlterado.getNome());
-		insert(professor);
+		return insert(professor);
 	}
 }

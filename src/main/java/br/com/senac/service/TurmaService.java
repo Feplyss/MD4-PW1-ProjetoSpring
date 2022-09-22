@@ -28,9 +28,9 @@ public class TurmaService {
 		repo.deleteById(id);
 	}
 	
-	public void update(Turma turmaAlterada) {
+	public Turma update(Turma turmaAlterada) {
 		Turma turma = select(turmaAlterada.getId());
 		turma.setNome(turmaAlterada.getNome());
-		insert(turma);
+		return insert(turma);
 	}
 }

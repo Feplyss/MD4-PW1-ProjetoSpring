@@ -28,9 +28,9 @@ public class CursoService {
 		repo.deleteById(id);
 	}
 	
-	public void update(Curso cursoAlterado) {
+	public Curso update(Curso cursoAlterado) {
 		Curso curso = select(cursoAlterado.getId());
 		curso.setNome(cursoAlterado.getNome());
-		insert(curso);
+		return insert(curso);
 	}
 }

@@ -30,10 +30,9 @@ public class AlunoService{
 	public void delete(Integer id) {
 		repo.deleteById(id);
 	}
-	
-	public void update(Aluno alunoAlterado) {
+	public Aluno update(Aluno alunoAlterado) {
 		Aluno aluno = select(alunoAlterado.getId());
 		aluno.setNome(alunoAlterado.getNome());
-		insert(alunoAlterado);
+		return insert(alunoAlterado);
 	}
 }
