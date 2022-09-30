@@ -31,6 +31,7 @@ public class CursoService {
 	public Curso update(Curso cursoAlterado) {
 		Curso curso = select(cursoAlterado.getId());
 		curso.setNome(cursoAlterado.getNome());
+		curso.setProfessor(cursoAlterado.getProfessor());
 		return insert(curso);
 	}
 }

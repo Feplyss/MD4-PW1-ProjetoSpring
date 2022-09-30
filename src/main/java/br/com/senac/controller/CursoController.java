@@ -10,12 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.senac.entity.Curso;
 import br.com.senac.service.CursoService;
+import br.com.senac.service.ProfessorService;
 
 @Controller
 @RequestMapping("curso")
 public class CursoController {
 	@Autowired
 	private CursoService cursoService;
+	@Autowired
+	private ProfessorService professorService;
+	
 	@GetMapping("/listarCursos")
 	public ModelAndView listaTodosCursos() {
 		ModelAndView mv = new ModelAndView("curso/paginaListaCursos");
@@ -26,6 +30,7 @@ public class CursoController {
 	public ModelAndView cadastrarCurso() {
 		ModelAndView mv = new ModelAndView("curso/cadastrarCurso");
 		mv.addObject("curso", new Curso());
+		mv.addObject("professores", professorService.selectAll());
 		return mv;
 	}
 	@PostMapping("/salvar")
@@ -42,6 +47,7 @@ public class CursoController {
 	public ModelAndView alterarCurso(@PathVariable("id") Integer id) {
 		ModelAndView mv = new ModelAndView("curso/alterarCurso");
 		mv.addObject("curso", cursoService.select(id));
+		mv.addObject("professores", professorService.selectAll());
 		return mv;
 	}
 	@PostMapping("/alterar")

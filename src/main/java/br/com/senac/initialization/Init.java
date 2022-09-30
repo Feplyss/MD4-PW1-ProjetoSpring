@@ -12,6 +12,7 @@ import br.com.senac.entity.Aluno;
 import br.com.senac.entity.Curso;
 import br.com.senac.entity.Professor;
 import br.com.senac.entity.Turma;
+import br.com.senac.repository.ProfessorRepository;
 //import br.com.senac.repository.AlunoRepository;
 import br.com.senac.service.AlunoService;
 import br.com.senac.service.CursoService;
@@ -28,6 +29,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	CursoService cursoService;
 	@Autowired
 	TurmaService turmaService;
+	@Autowired
+	ProfessorRepository professorRepository;
 	
 	//@Autowired
 	//AlunoRepository repo;
@@ -48,18 +51,18 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		//repo.saveAll(Arrays.asList(aluno1, aluno2, aluno3));
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		List<Aluno> listaAlunos = alunoService.selectAll();
 		for(Aluno aluno: listaAlunos) {
 			System.out.println(aluno.getNome());
 		}
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		System.out.println(alunoService.select(2).getNome());
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		alunoService.delete(2);
 		
@@ -68,7 +71,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 			System.out.println(aluno.getNome());
 		}
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		Aluno alunoAlterado = aluno1;
 		alunoAlterado.setNome("Rogerio Gerundes");
@@ -76,9 +79,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		System.out.println(alunoService.select(alunoAlterado.getId()).getNome());
 		
-		System.out.println("-----------------------------");
-		System.out.println("-----------------------------");
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		Professor professor1 = new Professor();
 		professor1.setNome("Juleide");
@@ -93,11 +96,11 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 			System.out.println(professor.getNome());
 		}
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		System.out.println(professorService.select(1).getNome());
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		professorService.delete(1);
 		
@@ -106,7 +109,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 			System.out.println(professor.getNome());
 		}
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		Professor professorAlterado = professor2;
 		professorAlterado.setNome("Genilson Ferreira");
@@ -114,30 +117,44 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		System.out.println(professorService.select(professorAlterado.getId()).getNome());
 		
-		System.out.println("-----------------------------");
-		System.out.println("-----------------------------");
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		Curso curso1 = new Curso();
 		curso1.setNome("Programacao web 1");
 		Curso curso2 = new Curso();
 		curso2.setNome("Testes");
 		
+		Professor p1 = new Professor();
+		p1.setNome("Hernesto");
+		
+		Professor p2 = new Professor();
+		p2.setNome("Danilsa");
+		
+		professorService.insert(p1);
+		professorService.insert(p2);
+		
+		//professorRepository.saveAll(Arrays.asList(p1,p2));
+		
+		curso1.setProfessor(p1);
+		curso2.setProfessor(p2);
+		
 		cursoService.insert(curso1);
 		cursoService.insert(curso2);
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		List<Curso> listaCursos = cursoService.selectAll();
 		for(Curso curso: listaCursos) {
 			System.out.println(curso.getNome());
 		}
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		System.out.println(cursoService.select(1).getNome());
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		cursoService.delete(1);
 		
@@ -146,7 +163,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 			System.out.println(curso.getNome());
 		}
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		Curso cursoAlterado = curso2;
 		cursoAlterado.setNome("Testes de software");
@@ -155,9 +172,9 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		System.out.println(cursoService.select(cursoAlterado.getId()).getNome());
 		
-		System.out.println("-----------------------------");
-		System.out.println("-----------------------------");
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		Turma turma1 = new Turma();
 		turma1.setNome("ADS2021.1");
@@ -172,11 +189,11 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 			System.out.println(turma.getNome());
 		}
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		System.out.println(turmaService.select(1).getNome());
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		turmaService.delete(1);
 		
@@ -185,7 +202,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 			System.out.println(turma.getNome());
 		}
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 		
 		Turma turmaAlterada = turma2;
 		turmaAlterada.setNome("ADS2022.2");
@@ -194,6 +211,6 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		
 		System.out.println(turmaService.select(turmaAlterada.getId()).getNome());
 		
-		System.out.println("-----------------------------");
+		System.out.println("---------------------------------------------------------------------------------------");
 	}
 }
