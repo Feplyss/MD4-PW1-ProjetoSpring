@@ -24,11 +24,12 @@
 							<input type="text" class="form-control input-sm" th:field="*{nome}" placeholder="Informe o nome" maxlenght="50"/>
 							
 						</div>
+						
 						<div class="form-group row">
 							<label>Professor</label>
 							<select class="form-control" th:field="*{professor}">
 								<option value="">Selecione um professor</option>
-								<option th:each="prof : ${professores}" th:value="${prof.id}" th:text="${prof.nome}"></option>
+								<option th:each="professor : ${listaProfessor}" th:value="${professor.id}" th:text="${professor.nome}"></option>
 							</select>							
 						</div>
 					</fieldset>

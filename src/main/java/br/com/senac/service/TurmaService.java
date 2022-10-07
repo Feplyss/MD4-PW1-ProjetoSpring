@@ -31,6 +31,7 @@ public class TurmaService {
 	public Turma update(Turma turmaAlterada) {
 		Turma turma = select(turmaAlterada.getId());
 		turma.setNome(turmaAlterada.getNome());
+		turma.setCursos(turmaAlterada.getCursos());
 		return insert(turma);
 	}
 }

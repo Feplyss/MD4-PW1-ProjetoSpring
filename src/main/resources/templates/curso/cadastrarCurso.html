@@ -21,12 +21,10 @@
 							
 						</div>
 						<div class="form-group">
-							<label>
-								Professores
-							</label>
+							<label>Professores</label>
 							<select class="form-control" th:field="*{professor}">
 								<option value="">Selecione um professor</option>
-								<option th:each="prof : ${professores}" th:value="${prof.id}" th:text="${prof.nome}"></option>
+								<option th:each="professor : ${listaProfessor}" th:value="${prof.id}" th:text="${prof.nome}"></option>
 							</select>
 						</div>
 					</fieldset>

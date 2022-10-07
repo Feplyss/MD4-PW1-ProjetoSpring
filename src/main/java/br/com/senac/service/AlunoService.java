@@ -33,6 +33,7 @@ public class AlunoService{
 	public Aluno update(Aluno alunoAlterado) {
 		Aluno aluno = select(alunoAlterado.getId());
 		aluno.setNome(alunoAlterado.getNome());
+		aluno.setTurma(alunoAlterado.getTurma());
 		return insert(alunoAlterado);
 	}
 }

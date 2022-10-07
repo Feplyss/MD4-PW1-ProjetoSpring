@@ -30,7 +30,7 @@ public class CursoController {
 	public ModelAndView cadastrarCurso() {
 		ModelAndView mv = new ModelAndView("curso/cadastrarCurso");
 		mv.addObject("curso", new Curso());
-		mv.addObject("professores", professorService.selectAll());
+		mv.addObject("listaProfessor", professorService.selectAll());
 		return mv;
 	}
 	@PostMapping("/salvar")
@@ -47,7 +47,7 @@ public class CursoController {
 	public ModelAndView alterarCurso(@PathVariable("id") Integer id) {
 		ModelAndView mv = new ModelAndView("curso/alterarCurso");
 		mv.addObject("curso", cursoService.select(id));
-		mv.addObject("professores", professorService.selectAll());
+		mv.addObject("listaProfessor", professorService.selectAll());
 		return mv;
 	}
 	@PostMapping("/alterar")

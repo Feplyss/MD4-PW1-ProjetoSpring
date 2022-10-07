@@ -18,12 +18,16 @@
 							<tr>
 								<th>ID</th>
 								<th>NOME</th>
+								<th>CURSOS<th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr  th:each="turma : ${turma}">
 								<td th:text="${turma.id}"></td>
 								<td th:text="${turma.nome}"></td>
+								<div th:each="curso : ${turma.cursos}">
+									<td th:text="${curso.nome}">
+								</div>
 								<td>
 									<div class="btn-group pull-right">
 										<a class="btn btn-sm btn-primary" th:href="@{/turma/paginaAlterar/{idTurma}(idTurma=${turma.id})}">ALTERAR</a>
