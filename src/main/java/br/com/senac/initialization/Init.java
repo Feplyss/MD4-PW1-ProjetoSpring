@@ -11,11 +11,14 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import br.com.senac.entity.Aluno;
+import br.com.senac.entity.AlunoCurso;
+import br.com.senac.entity.Avaliacao;
 import br.com.senac.entity.Curso;
 import br.com.senac.entity.Turma;
 import br.com.senac.repository.ProfessorRepository;
 //import br.com.senac.repository.AlunoRepository;
 import br.com.senac.service.AlunoService;
+import br.com.senac.service.AvaliacaoService;
 import br.com.senac.service.CursoService;
 import br.com.senac.service.ProfessorService;
 import br.com.senac.service.TurmaService;
@@ -30,6 +33,8 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	CursoService cursoService;
 	@Autowired
 	TurmaService turmaService;
+	@Autowired
+	private AvaliacaoService avaliacaoService;
 	@Autowired
 	ProfessorRepository professorRepository;
 	
@@ -76,28 +81,43 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		t3.setCursos(listaCursos3);
 		turmaService.insert(t3);
 		
-		Aluno aluno1 = new Aluno();
-		aluno1.setNome("Rogerio");
-		aluno1.setTurma(t3);
+		Aluno a1 = new Aluno();
+		a1.setNome("Rogerio");
+		a1.setTurma(t3);
+		alunoService.insert(a1);
 		
-		Aluno aluno2 = new Aluno();
-		aluno2.setNome("Alfredo");
-		aluno2.setTurma(t1);
+		Aluno a2 = new Aluno();
+		a2.setNome("Alfredo");
+		a2.setTurma(t1);
+		alunoService.insert(a2);
 		
-		Aluno aluno3 = new Aluno();
-		aluno3.setNome("Juleide");
-		aluno3.setTurma(t2);
+		Aluno a3 = new Aluno();
+		a3.setNome("Juleide");
+		a3.setTurma(t2);
+		alunoService.insert(a3);
 		
-		alunoService.insert(aluno1);
-		alunoService.insert(aluno2);
-		alunoService.insert(aluno3);
+		//--------------------------------------------------------------------------------------------------------
 		
-		alunoService.insert(aluno1);
-		alunoService.insert(aluno2);
-		alunoService.insert(aluno3);
+		Avaliacao av1 = new Avaliacao();
 		
-		System.out.println(alunoService.select(1).getTurma().getNome());
-		System.out.println(alunoService.select(2).getTurma().getNome());
-		System.out.println(alunoService.select(3).getTurma().getNome());
+		AlunoCurso ac1 = new AlunoCurso();
+		ac1.setAluno(a1);
+		ac1.setCurso(c1);
+		
+		av1.setAlunoCurso(ac1);
+		av1.setConceito("I");
+		
+		avaliacaoService.insert(av1);
+		
+		Avaliacao av2 = new Avaliacao();
+		
+		AlunoCurso ac2 = new AlunoCurso();
+		ac2.setAluno(a2);
+		ac2.setCurso(c2);
+		
+		av2.setAlunoCurso(ac2);
+		av2.setConceito("B");
+		
+		avaliacaoService.insert(av2);
 	}
 }

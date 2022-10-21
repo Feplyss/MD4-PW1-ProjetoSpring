@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+	<title>Listagem de notas</title>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"></link>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="panel-default">
+			<div class="text-center">
+				<h1 class="h4 text-gray-900 mb-4">Listagem de notas</h1>
+			</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-sm table-striped table-hover table-bordered">
+						<thead>
+							<tr>
+								<th>ALUNO</th>
+								<th>CURSO</th>
+								<th>CONCEITO</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr  th:each="avaliacao : ${avaliacoes}">
+								<td th:text="${avaliacao.alunoCurso.aluno.nome}"></td>
+								<td th:text="${avaliacao.alunoCurso.curso.nome}"></td>
+								<td th:text="${avaliacao.conceito}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<a class="btn btn-sm btn-success" href="/avaliacoes/adiciona">LANÇAR UMA NOTA</a>
+	</div>
+</body>
+</html>
