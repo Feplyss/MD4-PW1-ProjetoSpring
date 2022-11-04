@@ -32,7 +32,7 @@ public class AvaliacaoController {
 		return mv;
 	}
 	
-	@GetMapping("/save")
+	@PostMapping("/save")
 	public ModelAndView save(@ModelAttribute("avaliacao") Avaliacao avaliacao) {
 		avaliacao.getAlunoCurso().setAluno(alunoService.select(avaliacao.getAlunoCurso().getAluno().getId()));
 		avaliacao.getAlunoCurso().setCurso(cursoService.select(avaliacao.getAlunoCurso().getCurso().getId()));

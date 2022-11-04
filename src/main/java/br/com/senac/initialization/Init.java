@@ -11,14 +11,12 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import br.com.senac.entity.Aluno;
-import br.com.senac.entity.AlunoCurso;
-import br.com.senac.entity.Avaliacao;
 import br.com.senac.entity.Curso;
+import br.com.senac.entity.Endereco;
 import br.com.senac.entity.Turma;
 import br.com.senac.repository.ProfessorRepository;
 //import br.com.senac.repository.AlunoRepository;
 import br.com.senac.service.AlunoService;
-import br.com.senac.service.AvaliacaoService;
 import br.com.senac.service.CursoService;
 import br.com.senac.service.ProfessorService;
 import br.com.senac.service.TurmaService;
@@ -34,8 +32,6 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	@Autowired
 	TurmaService turmaService;
 	@Autowired
-	private AvaliacaoService avaliacaoService;
-	@Autowired
 	ProfessorRepository professorRepository;
 	
 	//@Autowired
@@ -44,6 +40,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		
+		//Cursos
 		Curso c1 = new Curso();
 		c1.setNome("Java");
 		cursoService.insert(c1);
@@ -56,6 +53,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		c3.setNome("NodeJS");
 		cursoService.insert(c3);
 		
+		//Listas de curso
 		List<Curso> listaCursos1 = new ArrayList<>();
 		listaCursos1.add(c1);
 		listaCursos1.add(c2);
@@ -66,6 +64,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		listaCursos3.add(c3);
 		listaCursos3.add(c1);
 		
+		//Turmas
 		Turma t1 = new Turma();
 		t1.setNome("ADS2021.1");
 		t1.setCursos(listaCursos1);
@@ -81,6 +80,7 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		t3.setCursos(listaCursos3);
 		turmaService.insert(t3);
 		
+		//Alunos
 		Aluno a1 = new Aluno();
 		a1.setNome("Rogerio");
 		a1.setTurma(t3);
@@ -96,28 +96,56 @@ public class Init implements ApplicationListener<ContextRefreshedEvent>{
 		a3.setTurma(t2);
 		alunoService.insert(a3);
 		
-		//--------------------------------------------------------------------------------------------------------
+		//Enderecos
+		Endereco e1 = new Endereco();
+		e1.setBairro("Pilares");
+		e1.setCep("123456789");
+		e1.setNumero(110);
+		e1.setRua("Rua Leopolda");
+		e1.setComplemento("Casa 123");
+		e1.setAluno(a3);
 		
-		Avaliacao av1 = new Avaliacao();
+		Endereco e2 = new Endereco();
+		e2.setBairro("Inhauma");
+		e2.setCep("234567891");
+		e2.setNumero(120);
+		e2.setRua("Rua Garrincho");
+		e2.setComplemento("Casa 456");
+		e2.setAluno(a1);
 		
-		AlunoCurso ac1 = new AlunoCurso();
-		ac1.setAluno(a1);
-		ac1.setCurso(c1);
+		Endereco e3 = new Endereco();
+		e3.setBairro("Madureira");
+		e3.setCep("345678912");
+		e3.setNumero(130);
+		e3.setRua("Rua Seu Jose");
+		e3.setComplemento("Casa 789");
+		e3.setAluno(a2);
 		
-		av1.setAlunoCurso(ac1);
-		av1.setConceito("I");
+		Endereco e4 = new Endereco();
+		e4.setBairro("Copacabana");
+		e4.setCep("456789123");
+		e4.setNumero(140);
+		e4.setRua("Rua Clemente");
+		e4.setComplemento("Casa 147");
+		e4.setAluno(a1);
 		
-		avaliacaoService.insert(av1);
+		//Listar turmas
+//		List<Turma> listaTurmas = turmaService.selectAll();
+//		for(Turma turma : listaTurmas) {
+//			System.out.println(turma.getNome());
+//			for(Aluno aluno : turma.getAlunos()) {
+//				System.out.println(aluno.getNome());
+//			};
+//		}
 		
-		Avaliacao av2 = new Avaliacao();
+		List<Turma> listaTurmas = turmaService.selectAlunos(3);
+		for(Turma turma : listaTurmas) {
+			for(Aluno aluno : turma.getAlunos()) {
+				System.out.println(aluno.getNome());
+			}
+		}
+		Aluno al1 = alunoService.selectByName("Rogerio");
 		
-		AlunoCurso ac2 = new AlunoCurso();
-		ac2.setAluno(a2);
-		ac2.setCurso(c2);
-		
-		av2.setAlunoCurso(ac2);
-		av2.setConceito("B");
-		
-		avaliacaoService.insert(av2);
+		al1.getEnderecos().forEach((e) -> System.out.println(e.getRua() + ", " + e.getNumero()));
 	}
 }

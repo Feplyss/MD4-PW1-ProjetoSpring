@@ -30,10 +30,16 @@ public class AlunoService{
 	public void delete(Integer id) {
 		repo.deleteById(id);
 	}
+	
 	public Aluno update(Aluno alunoAlterado) {
 		Aluno aluno = select(alunoAlterado.getId());
 		aluno.setNome(alunoAlterado.getNome());
 		aluno.setTurma(alunoAlterado.getTurma());
 		return insert(alunoAlterado);
+	}
+	
+	public Aluno selectByName(String nome) {
+		Aluno aluno = repo.findByNome(nome);
+		return aluno;
 	}
 }

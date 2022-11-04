@@ -34,4 +34,8 @@ public class TurmaService {
 		turma.setCursos(turmaAlterada.getCursos());
 		return insert(turma);
 	}
+	
+	public List<Turma> selectAlunos(Integer idTurma){
+		return repo.findAllByIdTurma(idTurma);
+	}
 }
